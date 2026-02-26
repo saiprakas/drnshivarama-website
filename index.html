@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sri Krishna Hospital - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <h1><i class="fas fa-hospital"></i> Sri Krishna Hospital</h1>
+      <p class="tagline">Excellence in Orthopedic & Joint Care</p>
+    </div>
+    <button class="nav-toggle"><i class="fas fa-bars"></i></button>
+    <nav class="navbar">
+      <a href="index.html" class="active">Home</a>
+      <a href="service.html">Services</a>
+      <a href="about.html">About Doctor</a>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="faq.html">FAQ</a>
+      <a href="blog.html">Blog</a>
+      <a href="appoinment.html">Book Appointment</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero fade-in">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <div>
+        <h2>Expert Orthopedic & Joint Replacement Care</h2>
+        <p>Led by Dr. N. Shivarama — D (Ortho), DNB (Ortho), FLLR, FIAS New Delhi</p>
+        <p class="credentials">Certified Orthopedic Surgeon | Joint Replacement Specialist | Trauma Surgeon</p>
+        <a class="btn btn-primary" href="appoinment.html">Book Appointment Now</a>
+      </div>
+      <div style="text-align: center;">
+        <img src="images/doctor.png" alt="Dr. N. Shivarama" style="width: 100%; max-width: 400px; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);">
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>Why Choose Sri Krishna Hospital?</h2>
+    <p>Dr. N. Shivarama is a highly qualified Orthopedic & Joint Replacement Surgeon with extensive experience in advanced orthopedic procedures, trauma care, and rehabilitation. At Sri Krishna Hospital, we combine compassionate care with modern medical expertise to restore mobility and improve quality of life.</p>
+    <div class="features">
+      <div class="feature-box" onclick="openModal('modal-surgeon')" style="cursor: pointer;">
+        <i class="fas fa-check-circle"></i>
+        <h4>Expert Surgeon</h4>
+        <p>Highly qualified & experienced</p>
+        <span class="click-hint">Click to learn more →</span>
+      </div>
+      <div class="feature-box" onclick="openModal('modal-facilities')" style="cursor: pointer;">
+        <i class="fas fa-hospital"></i>
+        <h4>Modern Facilities</h4>
+        <p>State-of-the-art equipment</p>
+        <span class="click-hint">Click to learn more →</span>
+      </div>
+      <div class="feature-box" onclick="openModal('modal-care')" style="cursor: pointer;">
+        <i class="fas fa-heart"></i>
+        <h4>Patient Care</h4>
+        <p>Compassionate treatment</p>
+        <span class="click-hint">Click to learn more →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal 1: Expert Surgeon -->
+  <div id="modal-surgeon" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal-surgeon')">&times;</span>
+      <div class="modal-header">
+        <i class="fas fa-user-md"></i>
+        <h2>Dr. N. Shivarama - Expert Orthopedic Surgeon</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3><i class="fas fa-certificate"></i> Qualifications & Credentials</h3>
+          <ul>
+            <li><strong>MBBS</strong> - Bachelor of Medicine, Bachelor of Surgery</li>
+            <li><strong>D (Ortho)</strong> - Diploma in Orthopedics (with 15+ years expertise)</li>
+            <li><strong>DNB (Ortho)</strong> - Diplomate of National Board in Orthopedics</li>
+            <li><strong>FLLR</strong> - Fellow of Limb Lengthening & Reconstruction</li>
+            <li><strong>FIAS</strong> - Fellow of Indian Arthroscopy Society</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-stethoscope"></i> Areas of Specialization</h3>
+          <ul>
+            <li>Joint Replacement Surgery (Knee, Hip, Shoulder)</li>
+            <li>Arthroscopic Surgery & Minimally Invasive Techniques</li>
+            <li>Trauma & Fracture Management</li>
+            <li>Sports Injury Treatment</li>
+            <li>Spinal Disorder Treatment</li>
+            <li>Limb Lengthening & Correction Procedures</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-briefcase"></i> Experience & Achievements</h3>
+          <ul>
+            <li>15+ Years of Clinical Practice in Orthopedic Surgery</li>
+            <li>Successfully completed 2000+ Joint Replacement Surgeries</li>
+            <li>Expert in Minimally Invasive & Arthroscopic Procedures</li>
+            <li>Published Research in Orthopedic Medical Journals</li>
+            <li>Regular Trainer for Advanced Orthopedic Techniques</li>
+            <li>Member of Indian Orthopaedic Association</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-award"></i> Philosophy & Approach</h3>
+          <p>Dr. Shivarama believes in patient-centric care with the latest surgical techniques. Each patient receives personalized treatment plans focusing on rapid recovery, pain-free mobility, and long-term quality of life improvement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Modern Facilities -->
+  <div id="modal-facilities" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal-facilities')">&times;</span>
+      <div class="modal-header">
+        <i class="fas fa-building"></i>
+        <h2>Modern Medical Facilities</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3><i class="fas fa-vial"></i> Advanced Surgical Equipment</h3>
+          <ul>
+            <li><strong>3D C-Arm Imaging</strong> - Real-time surgical guidance with precision</li>
+            <li><strong>Arthroscopy Suite</strong> - Minimally invasive joint surgery equipment</li>
+            <li><strong>Robotic Assisted Systems</strong> - For precise joint alignment</li>
+            <li><strong>High-Definition Endoscopy</strong> - Crystal-clear diagnostic visualization</li>
+            <li><strong>Advanced Anesthesia Systems</strong> - Latest monitoring & safety protocols</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-microscope"></i> Diagnostic & Laboratory</h3>
+          <ul>
+            <li>MRI & CT Scan (256-slice technology)</li>
+            <li>Digital X-Ray Systems with 3D Volume Rendering</li>
+            <li>Ultrasound-Guided Injections & Biopsies</li>
+            <li>Full-Fledged Lab with Real-time Test Results</li>
+            <li>Bone Density Testing (DEXA Scan)</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-bed"></i> Patient Care Infrastructure</h3>
+          <ul>
+            <li>ICU with 24/7 Advanced Life Support</li>
+            <li>Comfortable Private & Semi-Private Rooms</li>
+            <li>Temperature-Controlled Operating Theaters</li>
+            <li>Modern Physiotherapy & Rehabilitation Center</li>
+            <li>Emergency Trauma Center (24/7 Availability)</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-check-double"></i> Quality & Safety Standards</h3>
+          <p><strong>ISO 9001:2015 Certified</strong> - Maintains international standards for quality management and patient safety protocols.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Patient Care -->
+  <div id="modal-care" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal-care')">&times;</span>
+      <div class="modal-header">
+        <i class="fas fa-hands-helping"></i>
+        <h2>Compassionate Patient Care</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3><i class="fas fa-handshake"></i> Our Patient Care Process</h3>
+          <ol style="padding-left: 20px;">
+            <li><strong>Initial Consultation</strong> - Detailed history, examination & imaging analysis</li>
+            <li><strong>Diagnosis & Planning</strong> - Clear explanation of condition & treatment options</li>
+            <li><strong>Pre-Surgery Counseling</strong> - Preparation guidelines & expectation management</li>
+            <li><strong>Surgery</strong> - Advanced surgical techniques with precision & safety</li>
+            <li><strong>Post-Surgery Care</strong> - 24/7 monitoring & pain management</li>
+            <li><strong>Rehabilitation</strong> - Personalized physiotherapy & recovery program</li>
+            <li><strong>Follow-up Support</strong> - Regular check-ups & long-term care</li>
+          </ol>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-smile"></i> What We Care About</h3>
+          <ul>
+            <li>Patient Comfort & Pain Management</li>
+            <li>Quick Recovery & Mobility Restoration</li>
+            <li>Clear Communication & Transparency</li>
+            <li>Emotional Support & Counseling</li>
+            <li>Family Involvement in Care</li>
+            <li>Long-term Health Outcomes</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-heartbeat"></i> Our Specialized Care Features</h3>
+          <ul>
+            <li><strong>Pain Management Specialists</strong> - Advanced pain relief protocols</li>
+            <li><strong>24/7 Nursing Care</strong> - Trained & compassionate nursing staff</li>
+            <li><strong>Certified Physiotherapists</strong> - Personalized rehabilitation programs</li>
+            <li><strong>Nutritional Support</strong> - Specialist dietitian for recovery optimization</li>
+            <li><strong>Psychological Counseling</strong> - Mental health support during recovery</li>
+            <li><strong>Home Care Services</strong> - Post-discharge support when needed</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3><i class="fas fa-chart-line"></i> Patient Success Metrics</h3>
+          <ul>
+            <li>98% Patient Satisfaction Rate</li>
+            <li>95% Positive Surgical Outcomes</li>
+            <li>Average Hospital Stay: 2-3 days</li>
+            <li>99% Infection-Free Surgery Rate</li>
+            <li>Rapid Return to Normal Activities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+  </script>
+
+  <!-- Doctor Profile Section -->
+  <section class="doctor-profile">
+    <div class="profile-container">
+      <div class="doctor-image">
+        <div class="circular-image">
+          <i class="fas fa-user-md"></i>
+        </div>
+        <p style="text-align: center; margin-top: 15px; color: var(--primary); font-weight: 600;">Dr. N. Shivarama</p>
+      </div>
+      <div class="profile-content">
+        <h2>Dr. N. Shivarama</h2>
+        <p class="profile-credentials">M.B.B.S., D (Ortho), DNB (Ortho), FLLR, FIAS</p>
+        <p class="profile-title">Chief Orthopedic Surgeon & Joint Replacement Specialist</p>
+        <p class="profile-bio">With 15+ years of dedicated experience in orthopedic surgery, Dr. Shivarama has earned recognition as a leading expert in joint replacement, trauma management, and sports injury treatment. His patient-centric approach combined with cutting-edge surgical techniques has transformed thousands of lives.</p>
+        <div class="profile-features">
+          <div class="profile-item">
+            <i class="fas fa-graduation-cap"></i>
+            <h4>World-Class Training</h4>
+            <p>Trained in advanced techniques from leading international institutions</p>
+          </div>
+          <div class="profile-item">
+            <i class="fas fa-award"></i>
+            <h4>Published Researcher</h4>
+            <p>Multiple publications in prestigious orthopedic medical journals</p>
+          </div>
+          <div class="profile-item">
+            <i class="fas fa-users"></i>
+            <h4>Mentor & Trainer</h4>
+            <p>Regular trainer for advanced orthopedic techniques & procedures</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="statistics-section">
+    <h2>Trusted by Thousands</h2>
+    <p class="section-subtitle">Proven Excellence in Orthopedic Care</p>
+    <div class="stats-container">
+      <div class="stat-box">
+        <div class="stat-number">1000+</div>
+        <div class="stat-label">Successful Surgeries</div>
+        <div class="stat-desc">Joint replacements & orthopedic procedures</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">3000+</div>
+        <div class="stat-label">Patients Treated</div>
+        <div class="stat-desc">Lives restored & mobility regained</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">7+</div>
+        <div class="stat-label">Years Experience</div>
+        <div class="stat-desc">Dedicated service in orthopedics</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Patient Satisfaction</div>
+        <div class="stat-desc">Trusted by communities nationwide</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Health Awareness Section -->
+  <section class="health-awareness">
+    <h2>Joint Health & Orthopedic Awareness</h2>
+    <p class="section-subtitle">Prevention & Care Tips for Healthy Joints</p>
+    
+    <div class="awareness-grid">
+      <div class="awareness-card">
+        <i class="fas fa-info-circle"></i>
+        <h3>Understanding Joint Pain</h3>
+        <p><strong>Common Causes:</strong></p>
+        <ul>
+          <li>Arthritis & Joint Degeneration</li>
+          <li>Sports Injuries</li>
+          <li>Fractures & Trauma</li>
+          <li>Repetitive Strain Injuries</li>
+          <li>Aging & Wear & Tear</li>
+        </ul>
+        <p style="margin-top: 15px;"><strong>Red Flags:</strong> Persistent pain, swelling, reduced mobility, or difficulty bearing weight require professional evaluation.</p>
+      </div>
+
+      <div class="awareness-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Prevention Strategies</h3>
+        <ul>
+          <li><strong>Maintain Healthy Weight</strong> - Reduces stress on joints</li>
+          <li><strong>Regular Exercise</strong> - Strengthens supporting muscles</li>
+          <li><strong>Proper Posture</strong> - Prevents unnecessary joint strain</li>
+          <li><strong>Warm Up & Cool Down</strong> - Essential for physical activities</li>
+          <li><strong>Protective Gear</strong> - During sports & high-risk activities</li>
+          <li><strong>Balanced Diet</strong> - Rich in calcium and vitamin D</li>
+        </ul>
+      </div>
+
+      <div class="awareness-card">
+        <i class="fas fa-heartbeat"></i>
+        <h3>When to Seek Treatment</h3>
+        <p><strong>Consult a specialist if you experience:</strong></p>
+        <ul>
+          <li>Pain lasting more than 2-3 weeks</li>
+          <li>Significant swelling or inflammation</li>
+          <li>Loss of joint mobility or flexibility</li>
+          <li>Instability or "giving way" sensations</li>
+          <li>Pain affecting daily activities</li>
+          <li>Night pain disrupting sleep</li>
+        </ul>
+        <p style="margin-top: 15px; color: var(--primary); font-weight: 600;">Early intervention can prevent complications!</p>
+      </div>
+
+      <div class="awareness-card">
+        <i class="fas fa-bone"></i>
+        <h3>Joint Replacement Benefits</h3>
+        <ul>
+          <li><strong>Pain Relief</strong> - Eliminate chronic joint pain</li>
+          <li><strong>Restored Mobility</strong> - Return to normal activities</li>
+          <li><strong>Improved Quality of Life</strong> - Better sleep & independence</li>
+          <li><strong>Long-lasting Results</strong> - 15-20 years durability</li>
+          <li><strong>Minimal Recovery</strong> - Fast rehabilitation</li>
+          <li><strong>Modern Techniques</strong> - Minimally invasive options</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="awareness-callout">
+      <h3><i class="fas fa-lightbulb"></i> Expert Tip</h3>
+      <p>Don't ignore early joint pain or stiffness. Most orthopedic conditions are easier to manage when detected early. Regular check-ups and prompt treatment can prevent the need for invasive procedures.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3><i class="fas fa-hospital"></i> Sri Krishna Hospital</h3>
+        <p>Premier orthopedic care center dedicated to restoring mobility and quality of life.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="appoinment.html">Book Appointment</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Our Services</h4>
+        <ul>
+          <li>Joint Replacement Surgery</li>
+          <li>Trauma & Fracture Care</li>
+          <li>Sports Injury Management</li>
+          <li>Spine & Back Pain Treatment</li>
+          <li>Rehabilitation & Physiotherapy</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Information</h4>
+        <p><i class="fas fa-phone"></i> <strong>Dr's Number:</strong> +91 XXXXXXXXX</p>
+        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> XXXXX@gmail.com</p>
+        <p><i class="fas fa-clock"></i> <strong>Hours:</strong></p>
+        <p>Mon-Sat: 9:00 AM – 5:00 PM</p>
+        <p>Sunday: 10:00 AM – 2:00 PM</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Hospital Locations</h4>
+        <p><strong>Sri Krishna Hospital:</strong></p>
+        <p>Boppana Plaza, NST Rd<br>Khammam, TG 507001<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXXX</a></p>
+        <p><strong>GBR Super Speciality:</strong></p>
+        <p>Palnadu Rd<br>Narasaraopeta, AP 522601<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXX</a></p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sri Krishna Hospital. All Rights Reserved.</p>
+      <p>Designed & Developed with care for better healthcare</p>
+    </div>
+  </footer>
+  <button id="scrollTop" title="Scroll to top">&#8679;</button>
+</body>
+</html>

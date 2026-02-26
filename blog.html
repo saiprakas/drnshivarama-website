@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Sri Krishna Hospital</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="main.js" defer></script>
+  <style>
+    .blog-container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .blog-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(28, 163, 163, 0.2);
+    }
+
+    .blog-image {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4em;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .blog-content {
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 0.85em;
+      color: #666;
+    }
+
+    .blog-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .blog-category {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .blog-card h3 {
+      color: var(--dark);
+      margin: 0 0 12px 0;
+      font-size: 1.35em;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .blog-card p {
+      color: var(--text);
+      margin: 0 0 15px 0;
+      line-height: 1.6;
+      font-size: 0.95em;
+    }
+
+    .blog-read-more {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .blog-read-more:hover {
+      gap: 12px;
+      color: var(--secondary);
+    }
+
+    .featured-article {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 40px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      margin-bottom: 50px;
+    }
+
+    .featured-image {
+      width: 100%;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5em;
+      color: white;
+    }
+
+    .featured-content {
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-content h2 {
+      color: var(--dark);
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .featured-content p {
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 1em;
+    }
+
+    .featured-content .blog-meta {
+      margin-bottom: 25px;
+    }
+
+    .read-article-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    .read-article-btn:hover {
+      transform: translateX(5px);
+      box-shadow: 0 8px 20px rgba(28, 163, 163, 0.3);
+    }
+
+    @media (max-width: 900px) {
+      .featured-article {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-image {
+        height: 250px;
+      }
+
+      .featured-content {
+        padding: 30px;
+      }
+
+      .featured-content h2 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <h1><i class="fas fa-hospital"></i> Sri Krishna Hospital</h1>
+      <p class="tagline">Excellence in Orthopedic & Joint Care</p>
+    </div>
+    <button class="nav-toggle"><i class="fas fa-bars"></i></button>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="service.html">Services</a>
+      <a href="about.html">About Doctor</a>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="faq.html">FAQ</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="appoinment.html">Book Appointment</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-hero fade-in">
+    <h2>Health & Wellness Blog</h2>
+    <p>Expert insights on joint care, prevention, nutrition, and living a healthy, active life</p>
+  </section>
+
+  <div class="blog-container">
+    <!-- Topic index -->
+    <div class="topic-list" style="margin-bottom:40px;">
+      <ul style="display:flex; flex-wrap:wrap; gap:15px; list-style:none; padding:0;">
+        <li><a href="#" onclick="window.location='article-back-pain.html'">Back Pain Management</a></li>
+        <li><a href="#" onclick="window.location='article-acl.html'">ACL Injuries</a></li>
+        <li><a href="#" onclick="window.location='article-physical-therapy.html'">Physical Therapy</a></li>
+        <li><a href="#" onclick="window.location='article-age-health.html'">Age & Orthopedic Health</a></li>
+        <li><a href="#" onclick="window.location='article-joint-prep.html'">Joint Surgery Prep</a></li>
+        <li><a href="#" onclick="window.location='article-opioid-pain.html'">Managing Post‑Surgery Pain</a></li>
+        <li><a href="#" onclick="window.location='article-exercise-joint.html'">Exercise & Joint Health</a></li>
+        <li><a href="#" onclick="window.location='article-nutrition.html'">Nutrition for Joint Health</a></li>
+      </ul>
+    </div>
+    <!-- Featured Article -->
+    <div class="featured-article">
+      <div class="featured-image" style="background: linear-gradient(135deg, #1ca3a3 0%, #0093b0 100%);">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <div class="featured-content">
+        <span class="blog-category"><i class="fas fa-star"></i> Featured Article</span>
+        <h2>Understanding Knee Pain: Causes, Treatments, and Prevention Strategies</h2>
+        <p>Knee pain affects millions of people worldwide. In this comprehensive guide, Dr. Shivarama explains the most common causes of knee pain, from arthritis to sports injuries, and shares evidence-based treatment options ranging from conservative management to advanced surgical interventions. Learn how to identify your symptoms and take the first step towards pain relief.</p>
+        <div class="blog-meta">
+          <span><i class="fas fa-calendar"></i> February 20, 2026</span>
+          <span><i class="fas fa-user"></i> Dr. N. Shivarama</span>
+          <span><i class="fas fa-clock"></i> 8 min read</span>
+        </div>
+        <a href="article-knee-pain.html" class="read-article-btn">Read Full Article <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Blog Articles Grid -->
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);">
+          <i class="fas fa-bone"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Joint Care</span>
+          <h3>How to Prepare for Joint Replacement Surgery</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>Pre-op exercises</li>
+            <li>Home preparation tips</li>
+          </ul>
+          <p>Learn what to expect before, during, and after the procedure.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> February 18, 2026</span>
+            <span><i class="fas fa-clock"></i> 6 min read</span>
+          </div>
+          <a href="article-joint-prep.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+          <i class="fas fa-spine"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Spine Health</span>
+          <h3>Back Pain Management: When to See a Specialist</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>Types of back pain</li>
+            <li>Red flags for referral</li>
+          </ul>
+          <p>Dr. Shivarama explains when conservative treatment works and when to get help.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> February 15, 2026</span>
+            <span><i class="fas fa-clock"></i> 7 min read</span>
+          </div>
+          <a href="article-back-pain.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);">
+          <i class="fas fa-futbol"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Sports Medicine</span>
+          <h3>ACL Injuries in Sports: Prevention and Recovery</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>How ACL tears happen</li>
+            <li>Prevention training</li>
+          </ul>
+          <p>Discover strategies and treatment options that help athletes return safely.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> February 12, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <a href="article-acl.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #34a853 0%, #0d652d 100%);">
+          <i class="fas fa-dumbbell"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Rehabilitation</span>
+          <h3>Physical Therapy: Your Roadmap to Recovery</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>Stages of rehabilitation</li>
+            <li>Example exercises</li>
+          </ul>
+          <p>Learn how to maximize your rehabilitation journey.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> February 10, 2026</span>
+            <span><i class="fas fa-clock"></i> 6 min read</span>
+          </div>
+          <a href="article-physical-therapy.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #29b6f6 0%, #01579b 100%);">
+          <i class="fas fa-heart-pulse"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Wellness</span>
+          <h3>Age and Orthopedic Health: What Changes with Time</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>Degeneration by decade</li>
+            <li>Prevention habits</li>
+          </ul>
+          <p>Understand the changes that occur and how to maintain mobility.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> February 8, 2026</span>
+            <span><i class="fas fa-clock"></i> 7 min read</span>
+          </div>
+          <a href="article-age-health.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #f06292 0%, #c2185b 100%);">
+          <i class="fas fa-shield-virus"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Recovery Tips</span>
+          <h3>Managing Post-Surgery Pain Without Opioids</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>Non-opioid medication choices</li>
+            <li>Supportive therapies</li>
+          </ul>
+          <p>Explore safer multimodal approaches for recovery.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> February 5, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <a href="article-opioid-pain.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #4db8a8 0%, #00796b 100%);">
+          <i class="fas fa-running"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Lifestyle</span>
+          <h3>Exercise and Joint Health: Finding the Right Balance</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>Low-impact activity ideas</li>
+            <li>Warm-up & listen to pain</li>
+          </ul>
+          <p>Learn how to strengthen joints without injury.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> February 1, 2026</span>
+            <span><i class="fas fa-clock"></i> 6 min read</span>
+          </div>
+          <a href="article-exercise-joint.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-image" style="background: linear-gradient(135deg, #ffb74d 0%, #f57c00 100%);">
+          <i class="fas fa-utensils"></i>
+        </div>
+        <div class="blog-content">
+          <span class="blog-category">Nutrition</span>
+          <h3>Nutrition for Joint Health: Foods That Heal</h3>
+          <ul style="margin:8px 0 12px 20px;">
+            <li>Anti-inflammatory food examples</li>
+            <li>Hydration & supplements</li>
+          </ul>
+          <p>Explore dietary strategies that support recovery.</p>
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> January 28, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <a href="article-nutrition.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section style="background: linear-gradient(135deg, #1ca3a3 0%, #0093b0 100%); color: white; padding: 60px 20px; text-align: center; margin: 60px 0;">
+    <h3 style="font-size: 2.2em; margin-bottom: 20px;">Subscribe to Our Health Newsletter</h3>
+    <p style="font-size: 1.1em; margin-bottom: 30px;">Get expert health tips and updates delivered to your inbox every week</p>
+    <div style="max-width: 500px; margin: 0 auto; display: flex; gap: 10px;">
+      <input type="email" placeholder="Enter your email address" style="flex: 1; padding: 12px 20px; border: none; border-radius: 5px; font-size: 1em;">
+      <button style="background: #ff6b6b; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: 600;">Subscribe</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3><i class="fas fa-hospital"></i> Sri Krishna Hospital</h3>
+        <p>Premier orthopedic care center dedicated to restoring mobility and quality of life.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="appoinment.html">Book Appointment</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Our Services</h4>
+        <ul>
+          <li>Joint Replacement Surgery</li>
+          <li>Trauma & Fracture Care</li>
+          <li>Sports Injury Management</li>
+          <li>Spine & Back Pain Treatment</li>
+          <li>Rehabilitation & Physiotherapy</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Information</h4>
+        <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +91 XXXXXXXXX</p>
+        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> XXXXX@gmail.com</p>
+        <p><i class="fas fa-clock"></i> <strong>Hours:</strong></p>
+        <p>Mon-Sat: 9:00 AM – 5:00 PM</p>
+        <p>Sunday: 10:00 AM – 2:00 PM</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Hospital Locations</h4>
+        <p><strong>Sri Krishna Hospital:</strong></p>
+        <p>Boppana Plaza, NST Rd<br>Khammam, TG 507001<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXXX</a></p>
+        <p><strong>GBR Super Speciality:</strong></p>
+        <p>Palnadu Rd<br>Narasaraopeta, AP 522601<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXX</a></p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sri Krishna Hospital. All Rights Reserved.</p>
+      <p>Designed & Developed with care for better healthcare</p>
+    </div>
+  </footer>
+  <button id="scrollTop" title="Scroll to top">&#8679;</button>
+</body>
+</html>

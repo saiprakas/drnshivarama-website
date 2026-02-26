@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment - Sri Krishna Hospital</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <h1><i class="fas fa-hospital"></i> Sri Krishna Hospital</h1>
+      <p class="tagline">Excellence in Orthopedic & Joint Care</p>
+    </div>
+    <button class="nav-toggle"><i class="fas fa-bars"></i></button>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="service.html">Services</a>
+      <a href="about.html">About Doctor</a>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="faq.html">FAQ</a>
+      <a href="blog.html">Blog</a>
+      <a href="appoinment.html" class="active">Book Appointment</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <form class="appointment-form fade-in">
+    <h2><i class="fas fa-calendar-check"></i> Book Your Appointment</h2>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+      <div>
+        <label><i class="fas fa-user"></i> First Name</label>
+        <input type="text" name="first_name" placeholder="Enter your first name" required>
+      </div>
+      <div>
+        <label><i class="fas fa-user"></i> Last Name</label>
+        <input type="text" name="last_name" placeholder="Enter your last name" required>
+      </div>
+    </div>
+
+    <label><i class="fas fa-birthday-cake"></i> Age</label>
+    <input type="number" name="age" placeholder="Enter your age" min="0" required>
+
+    <label><i class="fas fa-venus-mars"></i> Gender</label>
+    <select name="gender" required>
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+
+    <label><i class="fas fa-phone"></i> Contact Number</label>
+    <input type="tel" name="phone" placeholder="+91 XXXXXXXXX" required>
+
+    <label><i class="fas fa-envelope"></i> Email Address <span style="color: #999; font-weight: normal;">(Optional)</span></label>
+    <input type="email" name="email" placeholder="your.email@example.com">
+
+    <label><i class="fas fa-clock"></i> Preferred Date & Time</label>
+    <input type="datetime-local" name="appointment_time" required>
+
+    <label><i class="fas fa-stethoscope"></i> Reason for Visit <span style="color: #999; font-weight: normal;">(Optional)</span></label>
+    <textarea name="reason" placeholder="Please describe your symptoms or reason for visit" rows="4"></textarea>
+
+    <button type="submit"><i class="fas fa-check"></i> Submit Appointment Request</button>
+  </form>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3><i class="fas fa-hospital"></i> Sri Krishna Hospital</h3>
+        <p>Premier orthopedic care center dedicated to restoring mobility and quality of life.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="appoinment.html">Book Appointment</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Our Services</h4>
+        <ul>
+          <li>Joint Replacement Surgery</li>
+          <li>Trauma & Fracture Care</li>
+          <li>Sports Injury Management</li>
+          <li>Spine & Back Pain Treatment</li>
+          <li>Rehabilitation & Physiotherapy</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Information</h4>
+        <p><i class="fas fa-phone"></i> <strong>Dr's Number:</strong> +91 XXXXXXXXX</p>
+        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> XXXXX@gmail.com</p>
+        <p><i class="fas fa-clock"></i> <strong>Hours:</strong></p>
+        <p>Mon-Sat: 9:00 AM – 5:00 PM</p>
+        <p>Sunday: 10:00 AM – 2:00 PM</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Hospital Locations</h4>
+        <p><strong>Sri Krishna Hospital:</strong></p>
+        <p>Boppana Plaza, NST Rd<br>Khammam, TG 507001<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXXX</a></p>
+        <p><strong>GBR Super Speciality:</strong></p>
+        <p>Palnadu Rd<br>Narasaraopeta, AP 522601<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXX</a></p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sri Krishna Hospital. All Rights Reserved.</p>
+      <p>Designed & Developed with care for better healthcare</p>
+    </div>
+  </footer>
+  </footer>
+</body>
+</html>
