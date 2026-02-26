@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Sri Krishna Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a3a52 0%, #1ca3a3 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header i {
+            font-size: 3em;
+            color: #1ca3a3;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .login-header h1 {
+            color: #1a3a52;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #1ca3a3;
+            box-shadow: 0 0 0 3px rgba(28, 163, 163, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #1a3a52 0%, #1ca3a3 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(28, 163, 163, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #c33;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #3c3;
+        }
+
+        .demo-credentials {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .demo-credentials strong {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .demo-credentials p {
+            margin: 5px 0;
+        }
+
+        .security-note {
+            text-align: center;
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <i class="fas fa-hospital"></i>
+            <h1>Sri Krishna Hospital</h1>
+            <p>Admin Reception Panel</p>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="adminId"><i class="fas fa-user"></i> Admin ID</label>
+                <input type="text" id="adminId" name="adminId" placeholder="Enter your admin ID" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Login to Admin Panel
+            </button>
+        </form>
+
+        <div class="demo-credentials">
+            <strong><i class="fas fa-info-circle"></i> Demo Credentials:</strong>
+            <p><strong>Admin ID:</strong> admin</p>
+            <p><strong>Password:</strong> admin123</p>
+        </div>
+
+        <div class="security-note">
+            <i class="fas fa-shield-alt"></i> Keep your credentials secure
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const adminId = document.getElementById('adminId').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:8000/admin_login.php', {
+                    method: 'POST',
+                        credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `adminId=${encodeURIComponent(adminId)}&password=${encodeURIComponent(password)}`
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('successMessage').textContent = '✓ Login successful! Redirecting...';
+                    document.getElementById('successMessage').style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'http://localhost:8000/admin_dashboard.html';
+                    }, 800);
+                } else {
+                    document.getElementById('errorMessage').textContent = '✗ ' + result.message;
+                    document.getElementById('errorMessage').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Login fetch error:', error);
+                const msg = error && error.message ? error.message : 'Connection error. Please try again.';
+                document.getElementById('errorMessage').textContent = '✗ ' + msg;
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

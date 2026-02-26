@@ -27,45 +27,98 @@
     </nav>
   </header>
 
-  <form class="appointment-form fade-in">
+  <form class="appointment-form fade-in" id="appointmentForm">
     <h2><i class="fas fa-calendar-check"></i> Book Your Appointment</h2>
     
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-      <div>
-        <label><i class="fas fa-user"></i> First Name</label>
-        <input type="text" name="first_name" placeholder="Enter your first name" required>
-      </div>
-      <div>
-        <label><i class="fas fa-user"></i> Last Name</label>
-        <input type="text" name="last_name" placeholder="Enter your last name" required>
-      </div>
+    <div id="successMessage" style="background: #efe; color: #3c3; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none; border-left: 4px solid #3c3;">
+      <i class="fas fa-check-circle"></i> <strong>Success!</strong> Your appointment has been booked. We'll contact you soon with confirmation.
     </div>
 
-    <label><i class="fas fa-birthday-cake"></i> Age</label>
-    <input type="number" name="age" placeholder="Enter your age" min="0" required>
+    <div id="errorMessage" style="background: #fee; color: #c33; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none; border-left: 4px solid #c33;">
+      <i class="fas fa-exclamation-circle"></i> <strong>Error:</strong> <span id="errorText"></span>
+    </div>
 
-    <label><i class="fas fa-venus-mars"></i> Gender</label>
-    <select name="gender" required>
-      <option value="">Select Gender</option>
-      <option>Male</option>
-      <option>Female</option>
-      <option>Other</option>
-    </select>
+    <label><i class="fas fa-user"></i> Full Name</label>
+    <input type="text" name="name" placeholder="Enter your full name" required>
 
-    <label><i class="fas fa-phone"></i> Contact Number</label>
+    <label><i class="fas fa-phone"></i> Contact Number *</label>
     <input type="tel" name="phone" placeholder="+91 XXXXXXXXX" required>
 
     <label><i class="fas fa-envelope"></i> Email Address <span style="color: #999; font-weight: normal;">(Optional)</span></label>
     <input type="email" name="email" placeholder="your.email@example.com">
 
-    <label><i class="fas fa-clock"></i> Preferred Date & Time</label>
-    <input type="datetime-local" name="appointment_time" required>
+    <label><i class="fas fa-calendar"></i> Preferred Date *</label>
+    <input type="date" name="appointmentDate" required>
 
-    <label><i class="fas fa-stethoscope"></i> Reason for Visit <span style="color: #999; font-weight: normal;">(Optional)</span></label>
-    <textarea name="reason" placeholder="Please describe your symptoms or reason for visit" rows="4"></textarea>
+    <label><i class="fas fa-clock"></i> Preferred Time *</label>
+    <input type="time" name="appointmentTime" required>
+
+    <label><i class="fas fa-user-md"></i> Doctor Requested</label>
+    <select name="doctorRequested" required>
+      <option value="">Select Doctor</option>
+      <option>DR N Shiva Rami Reddy</option>
+    </select>
+
+    <label><i class="fas fa-stethoscope"></i> Reason for Visit / Medical Issue *</label>
+    <textarea name="issue" placeholder="Please describe your symptoms or reason for visit" rows="4" required></textarea>
 
     <button type="submit"><i class="fas fa-check"></i> Submit Appointment Request</button>
   </form>
+
+  <script>
+    document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      // Show loading state
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+      submitBtn.disabled = true;
+
+      try {
+        // send as urlencoded so express bodyParser can parse it reliably
+        const payload = new URLSearchParams();
+        for (const [k, v] of formData) payload.append(k, v);
+
+        const response = await fetch('http://localhost:8000/save_appointment.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: payload.toString()
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Show success message
+          document.getElementById('successMessage').style.display = 'block';
+          document.getElementById('errorMessage').style.display = 'none';
+          
+          // Reset form
+          form.reset();
+          
+          // Hide success message after 5 seconds and scroll to top
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 2000);
+        } else {
+          // Show error message
+          document.getElementById('errorMessage').style.display = 'block';
+          document.getElementById('errorText').textContent = result.message || 'An error occurred. Please try again.';
+          document.getElementById('successMessage').style.display = 'none';
+        }
+      } catch (error) {
+        document.getElementById('errorMessage').style.display = 'block';
+        document.getElementById('errorText').textContent = 'Connection error. Please try again.';
+        document.getElementById('successMessage').style.display = 'none';
+      } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
 
   <footer class="footer">
     <div class="footer-container">
@@ -108,8 +161,7 @@
         <h4>Hospital Locations</h4>
         <p><strong>Sri Krishna Hospital:</strong></p>
         <p>Boppana Plaza, NST Rd<br>Khammam, TG 507001<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXXX</a></p>
-        <p><strong>GBR Super Speciality:</strong></p>
-        <p>Palnadu Rd<br>Narasaraopeta, AP 522601<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXX</a></p>
+        
       </div>
 
       <div class="footer-section">

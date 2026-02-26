@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Sri Krishna Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a3a52 0%, #1ca3a3 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .admin-info {
+            text-align: right;
+            font-size: 0.9em;
+        }
+
+        .admin-name {
+            font-weight: 600;
+            display: block;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: white;
+            color: #1a3a52;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1ca3a3;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* Controls Section */
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .control-group select,
+        .control-group input {
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.3s;
+        }
+
+        .control-group select:focus,
+        .control-group input:focus {
+            outline: none;
+            border-color: #1ca3a3;
+            box-shadow: 0 0 0 3px rgba(28, 163, 163, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a3a52 0%, #1ca3a3 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(28, 163, 163, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        /* Appointments List */
+        .appointments-section {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            background: #f5f7fa;
+            padding: 20px 25px;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1a3a52;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .count-badge {
+            background: #1ca3a3;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+
+        .appointments-list {
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .appointment-card {
+            border-left: 5px solid #1ca3a3;
+            padding: 20px 25px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+
+        .appointment-card:hover {
+            background: #f9fafb;
+        }
+
+        .appointment-card.status-accepted {
+            border-left-color: #28a745;
+            background: #f0fdf4;
+        }
+
+        .appointment-card.status-declined {
+            border-left-color: #dc3545;
+            background: #fdf0f0;
+        }
+
+        .appointment-header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .apt-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .apt-label {
+            font-size: 0.8em;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .apt-value {
+            font-size: 1em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .apt-value.phone {
+            color: #1ca3a3;
+            cursor: pointer;
+        }
+
+        .apt-value.phone:hover {
+            text-decoration: underline;
+        }
+
+        .appointment-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .status-dropdown {
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .status-dropdown.pending {
+            border-color: #ffc107;
+            color: #ff9800;
+        }
+
+        .status-dropdown.accepted {
+            border-color: #28a745;
+            color: #28a745;
+        }
+
+        .status-dropdown.declined {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .delete-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #ff5252;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 30px;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1ca3a3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-right {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .appointment-header {
+                grid-template-columns: 1fr;
+            }
+
+            .appointment-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .button-group {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1><i class="fas fa-hospital"></i> Admin Dashboard</h1>
+        <div class="header-right">
+            <div class="admin-info">
+                <span class="admin-name" id="adminName">Admin</span>
+                <small>Reception Panel</small>
+            </div>
+            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Stats Section -->
+        <div class="stats-section" id="statsSection">
+            <div class="stat-card">
+                <i class="stat-icon fas fa-calendar-check" style="color: #1ca3a3;"></i>
+                <div class="stat-number" id="statTotal">0</div>
+                <div class="stat-label">Total Today</div>
+            </div>
+            <div class="stat-card">
+                <i class="stat-icon fas fa-check-circle" style="color: #28a745;"></i>
+                <div class="stat-number" id="statAccepted">0</div>
+                <div class="stat-label">Accepted</div>
+            </div>
+            <div class="stat-card">
+                <i class="stat-icon fas fa-clock" style="color: #ffc107;"></i>
+                <div class="stat-number" id="statPending">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+                <i class="stat-icon fas fa-times-circle" style="color: #dc3545;"></i>
+                <div class="stat-number" id="statDeclined">0</div>
+                <div class="stat-label">Declined</div>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls">
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label for="filterDate"><i class="fas fa-calendar"></i> Filter by Date</label>
+                    <select id="filterDate" onchange="loadAppointments()">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="all">All Appointments</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="sortBy"><i class="fas fa-sort"></i> Sort By</label>
+                    <select id="sortBy" onchange="loadAppointments()">
+                        <option value="date">Date & Time</option>
+                        <option value="name">Patient Name (A-Z)</option>
+                        <option value="doctor">Doctor Requested</option>
+                        <option value="status">Status</option>
+                        <option value="latest">Latest First</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="filterStatus"><i class="fas fa-filter"></i> Filter by Status</label>
+                    <select id="filterStatus" onchange="loadAppointments()">
+                        <option value="all">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Declined">Declined</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="loadAppointments()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetFilters()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments Section -->
+        <div class="appointments-section">
+            <div class="section-title">
+                <span><i class="fas fa-list"></i> Appointment Requests <span class="count-badge" id="countBadge">0</span></span>
+            </div>
+            <div id="appointmentsList" class="appointments-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading appointments...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        window.addEventListener('load', () => {
+                    fetch('http://localhost:8000/admin_check_auth.php', { credentials: 'include' })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('adminName').textContent = data.admin_id;
+                        loadAppointments();
+                        loadStats();
+                        // Refresh every 30 seconds
+                        setInterval(loadAppointments, 30000);
+                        setInterval(loadStats, 30000);
+                    } else {
+                        window.location.href = 'admin_login.html';
+                    }
+                })
+                .catch(() => {
+                    window.location.href = 'admin_login.html';
+                });
+        });
+
+        function loadAppointments() {
+            const filter = document.getElementById('filterDate').value;
+            const sortBy = document.getElementById('sortBy').value;
+            const status = document.getElementById('filterStatus').value;
+
+            const params = new URLSearchParams({
+                action: 'getAppointments',
+                filter: filter,
+                sortBy: sortBy,
+                status: status
+            });
+
+                fetch('http://localhost:8000/admin_api.php?' + params, { credentials: 'include' })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        displayAppointments(data.data);
+                        document.getElementById('countBadge').textContent = data.count;
+                    } else {
+                        showError(data.message);
+                    }
+                })
+                .catch(err => showError('Failed to load appointments'));
+        }
+
+        function loadStats() {
+                fetch('http://localhost:8000/admin_api.php?action=getStats', { credentials: 'include' })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('statTotal').textContent = data.data.total_today;
+                        document.getElementById('statAccepted').textContent = data.data.accepted_today;
+                        document.getElementById('statPending').textContent = data.data.pending_today;
+                        document.getElementById('statDeclined').textContent = data.data.declined_today;
+                    }
+                })
+                .catch(() => {});
+        }
+
+        function displayAppointments(appointments) {
+            const list = document.getElementById('appointmentsList');
+
+            if (appointments.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No appointments found</p>
+                        <small>Try adjusting your filters</small>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = appointments.map(apt => `
+                <div class="appointment-card status-${apt.status.toLowerCase()}">
+                    <div class="appointment-header">
+                        <div class="apt-field">
+                            <div class="apt-label">Patient Name</div>
+                            <div class="apt-value">${escapeHtml(apt.name)}</div>
+                        </div>
+                        <div class="apt-field">
+                            <div class="apt-label">Phone Number</div>
+                            <div class="apt-value phone" onclick="callPatient('${apt.phone}')">${apt.phone} <i class="fas fa-phone"></i></div>
+                        </div>
+                        <div class="apt-field">
+                            <div class="apt-label">Email</div>
+                            <div class="apt-value">${escapeHtml(apt.email)}</div>
+                        </div>
+                        <div class="apt-field">
+                            <div class="apt-label">Doctor Requested</div>
+                            <div class="apt-value">${escapeHtml(apt.doctor_requested)}</div>
+                        </div>
+                    </div>
+                    <div class="appointment-header">
+                        <div class="apt-field">
+                            <div class="apt-label">Appointment Date</div>
+                            <div class="apt-value">${apt.appointment_date_display}</div>
+                        </div>
+                        <div class="apt-field">
+                            <div class="apt-label">Appointment Time</div>
+                            <div class="apt-value">${apt.appointment_time_display}</div>
+                        </div>
+                        <div class="apt-field">
+                            <div class="apt-label">Issue</div>
+                            <div class="apt-value">${escapeHtml(apt.issue)}</div>
+                        </div>
+                    </div>
+                    <div class="appointment-footer">
+                        <select class="status-dropdown ${apt.status.toLowerCase()}" onchange="updateStatus(${apt.id}, this.value)">
+                            <option value="Pending" ${apt.status === 'Pending' ? 'selected' : ''}>⏳ Pending</option>
+                            <option value="Accepted" ${apt.status === 'Accepted' ? 'selected' : ''}>✓ Accepted</option>
+                            <option value="Declined" ${apt.status === 'Declined' ? 'selected' : ''}>✗ Declined</option>
+                        </select>
+                        <div class="action-buttons">
+                            <button class="delete-btn" onclick="deleteAppointment(${apt.id})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateStatus(appointmentId, newStatus) {
+            const formData = new FormData();
+            formData.append('action', 'updateStatus');
+            formData.append('appointmentId', appointmentId);
+            formData.append('status', newStatus);
+
+                // send as POST with urlencoded body so server can parse it
+                fetch('http://localhost:8000/admin_api.php', {
+                    credentials: 'include',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ action: 'updateStatus', appointmentId: appointmentId, status: newStatus })
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        showSuccess('Status updated!');
+                        loadAppointments();
+                        loadStats();
+                    } else {
+                        showError(data.message);
+                    }
+                })
+                .catch(() => showError('Failed to update status'));
+        }
+
+        function deleteAppointment(appointmentId) {
+            if (!confirm('Are you sure you want to delete this appointment?')) return;
+
+            const formData = new FormData();
+            formData.append('action', 'deleteAppointment');
+            formData.append('appointmentId', appointmentId);
+
+                fetch('http://localhost:8000/admin_api.php', {
+                    credentials: 'include',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ action: 'deleteAppointment', appointmentId: appointmentId })
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        showSuccess('Appointment deleted!');
+                        loadAppointments();
+                        loadStats();
+                    } else {
+                        showError(data.message);
+                    }
+                })
+                .catch(() => showError('Failed to delete appointment'));
+        }
+
+        function resetFilters() {
+            document.getElementById('filterDate').value = 'today';
+            document.getElementById('sortBy').value = 'date';
+            document.getElementById('filterStatus').value = 'all';
+            loadAppointments();
+        }
+
+        function logout() {
+                        fetch('http://localhost:8000/admin_logout.php', { credentials: 'include' })
+                        .then(() => {
+                            window.location.href = 'http://localhost:8000/admin_login.html';
+                        });
+        }
+
+        function callPatient(phone) {
+            window.location.href = 'tel:' + phone;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showError(message) {
+            alert('Error: ' + message);
+        }
+
+        function showSuccess(message) {
+            // You can replace this with a toast notification if needed
+            console.log('Success: ' + message);
+        }
+    </script>
+</body>
+</html>
