@@ -167,6 +167,17 @@ header {
   background: var(--secondary);
 }
 
+/* 12‑hour time picker styling */
+.appointment-form .time-picker {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.appointment-form .time-picker select {
+  width: auto;
+  flex: none;
+}
+
 /* fade-in animation helper */
 .fade-in {
   opacity: 0;

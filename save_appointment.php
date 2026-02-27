@@ -4,11 +4,11 @@ header('Content-Type: application/json');
 $dbPath = __DIR__ . '/appointments.db';
 
 try {
-    // Create database if it doesn't exist
+    // open database
     $db = new PDO('sqlite:' . $dbPath);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Create table if it doesn't exist
+    // ensure appointments table exists
     $db->exec("CREATE TABLE IF NOT EXISTS appointments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -19,9 +19,16 @@ try {
         doctor_requested TEXT NOT NULL,
         issue TEXT NOT NULL,
         status TEXT DEFAULT 'Pending',
+        client_timestamp TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )");
+
+    // add client_timestamp column if missing
+    $cols = $db->query("PRAGMA table_info(appointments)")->fetchAll(PDO::FETCH_COLUMN, 1);
+    if (!in_array('client_timestamp', $cols)) {
+        $db->exec("ALTER TABLE appointments ADD COLUMN client_timestamp TEXT");
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['name'] ?? '';
@@ -31,6 +38,15 @@ try {
         $appointmentTime = $_POST['appointmentTime'] ?? '';
         $doctorRequested = $_POST['doctorRequested'] ?? '';
         $issue = $_POST['issue'] ?? '';
+        $clientTs = $_POST['client_timestamp'] ?? null;
+
+        // convert time to 24h for storage
+        if (!empty($appointmentTime)) {
+            $converted = date('H:i', strtotime($appointmentTime));
+            if ($converted) {
+                $appointmentTime = $converted;
+            }
+        }
 
         // Validate required fields
         if (empty($name) || empty($phone) || empty($appointmentDate) || empty($appointmentTime)) {
@@ -42,11 +58,7 @@ try {
         }
 
         // Insert appointment
-        $stmt = $db->prepare("
-            INSERT INTO appointments (name, email, phone, appointment_date, appointment_time, doctor_requested, issue)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ");
-
+        $stmt = $db->prepare("INSERT INTO appointments (name, email, phone, appointment_date, appointment_time, doctor_requested, issue, client_timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $result = $stmt->execute([
             $name,
             $email,
@@ -54,7 +66,8 @@ try {
             $appointmentDate,
             $appointmentTime,
             $doctorRequested,
-            $issue
+            $issue,
+            $clientTs
         ]);
 
         if ($result) {

@@ -42,7 +42,7 @@
     <input type="text" name="name" placeholder="Enter your full name" required>
 
     <label><i class="fas fa-phone"></i> Contact Number *</label>
-    <input type="tel" name="phone" placeholder="+91 XXXXXXXXX" required>
+    <input type="tel" name="phone" placeholder="+91 70136 96997" required>
 
     <label><i class="fas fa-envelope"></i> Email Address <span style="color: #999; font-weight: normal;">(Optional)</span></label>
     <input type="email" name="email" placeholder="your.email@example.com">
@@ -51,7 +51,39 @@
     <input type="date" name="appointmentDate" required>
 
     <label><i class="fas fa-clock"></i> Preferred Time *</label>
-    <input type="time" name="appointmentTime" required>
+    <!-- custom 12‑hour time picker -->
+    <div class="time-picker">
+      <select id="timeHour" required>
+        <option value="">HH</option>
+        <!-- hours 1‑12 -->
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      :
+      <select id="timeMinute" required>
+        <option value="">MM</option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+      </select>
+      <select id="timePeriod" required>
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
+    </div>
+    <input type="hidden" name="appointmentTime" id="appointmentTime">
+    <input type="hidden" name="client_timestamp" id="client_timestamp">
 
     <label><i class="fas fa-user-md"></i> Doctor Requested</label>
     <select name="doctorRequested" required>
@@ -66,10 +98,29 @@
   </form>
 
   <script>
+    // helper to update hidden time field whenever selects change
+    function updateTimeField() {
+      const h = document.getElementById('timeHour').value;
+      const m = document.getElementById('timeMinute').value;
+      const p = document.getElementById('timePeriod').value;
+      if (h && m && p) {
+        document.getElementById('appointmentTime').value = `${h}:${m} ${p}`;
+      }
+    }
+
+    ['timeHour','timeMinute','timePeriod'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('change', updateTimeField);
+    });
+
     document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const form = e.target;
+      // refresh time field and capture client local timestamp
+      updateTimeField();
+      const now = new Date();
+      document.getElementById('client_timestamp').value = now.toISOString();
       const formData = new FormData(form);
 
       // Show loading state
@@ -150,8 +201,8 @@
 
       <div class="footer-section">
         <h4>Contact Information</h4>
-        <p><i class="fas fa-phone"></i> <strong>Dr's Number:</strong> +91 XXXXXXXXX</p>
-        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> XXXXX@gmail.com</p>
+        <p><i class="fas fa-phone"></i> <strong>Dr's Number:</strong> <a href="tel:+917013696997" style="color: var(--primary); text-decoration: none;">+91 70136 96997</a></p>
+        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:Nshivaramireddy@gmail.com" style="color: var(--primary);">Nshivaramireddy@gmail.com</a></p>
         <p><i class="fas fa-clock"></i> <strong>Hours:</strong></p>
         <p>Mon-Sat: 9:00 AM – 5:00 PM</p>
         <p>Sunday: 10:00 AM – 2:00 PM</p>
@@ -160,7 +211,8 @@
       <div class="footer-section">
         <h4>Hospital Locations</h4>
         <p><strong>Sri Krishna Hospital:</strong></p>
-        <p>Boppana Plaza, NST Rd<br>Khammam, TG 507001<br><i class="fas fa-phone"></i> <a href="tel:+91XXXXXXXXX" style="color: var(--primary);" >+91 XXXXXXXXX</a></p>
+        <p>Boppana Plaza, NST Rd<br>Khammam, TG 507001<br><i class="fas fa-phone"></i> <a href="tel:+917569802928" style="color: var(--primary);">+91 75698 02928</a> / <a href="tel:+918099035332" style="color: var(--primary);">+91 80990 35332</a></p>
+        <p style="margin-top:12px;"><strong>APEX Multi Speciality Hospital:</strong><br>NST ROAD, Balaji Nagar<br>Khammam<br><i class="fas fa-phone"></i> <a href="tel:+919063706006" style="color: var(--primary);">+91 90637 06006</a></p>
         
       </div>
 

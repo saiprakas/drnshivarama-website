@@ -70,6 +70,20 @@ try {
         foreach ($appointments as &$apt) {
             $apt['appointment_date_display'] = date('d M, Y', strtotime($apt['appointment_date']));
             $apt['appointment_time_display'] = date('h:i A', strtotime($apt['appointment_time']));
+            // also include when the appointment was created (booking time)
+            if (!empty($apt['created_at'])) {
+                $apt['created_at_display'] = date('d M, Y h:i A', strtotime($apt['created_at']));
+            } else {
+                $apt['created_at_display'] = '';
+            }
+            // client local timestamp if provided
+            if (!empty($apt['client_timestamp'])) {
+                $apt['client_timestamp_raw'] = $apt['client_timestamp'];
+                // convert to server timezone display for now
+                $apt['client_timestamp_display'] = date('d M, Y h:i A', strtotime($apt['client_timestamp']));
+            } else {
+                $apt['client_timestamp_display'] = '';
+            }
         }
 
         echo json_encode([
@@ -109,10 +123,17 @@ try {
         $today = date('Y-m-d');
 
         $stats = [
+            // appointments scheduled for today
             'total_today' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE DATE(appointment_date) = '$today'")->fetch(PDO::FETCH_ASSOC)['count'],
             'accepted_today' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE DATE(appointment_date) = '$today' AND status = 'Accepted'")->fetch(PDO::FETCH_ASSOC)['count'],
             'pending_today' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE DATE(appointment_date) = '$today' AND status = 'Pending'")->fetch(PDO::FETCH_ASSOC)['count'],
             'declined_today' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE DATE(appointment_date) = '$today' AND status = 'Declined'")->fetch(PDO::FETCH_ASSOC)['count'],
+            // appointments booked (created) today regardless of appointment date
+            'booked_today' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE DATE(created_at) = '$today'")->fetch(PDO::FETCH_ASSOC)['count'],
+            // overall totals ignoring date filter
+            'accepted_all' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE status = 'Accepted'")->fetch(PDO::FETCH_ASSOC)['count'],
+            'pending_all' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE status = 'Pending'")->fetch(PDO::FETCH_ASSOC)['count'],
+            'declined_all' => $db->query("SELECT COUNT(*) as count FROM appointments WHERE status = 'Declined'")->fetch(PDO::FETCH_ASSOC)['count'],
         ];
 
         echo json_encode([

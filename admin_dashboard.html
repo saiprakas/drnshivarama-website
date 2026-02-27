@@ -448,17 +448,37 @@
             <div class="stat-card">
                 <i class="stat-icon fas fa-check-circle" style="color: #28a745;"></i>
                 <div class="stat-number" id="statAccepted">0</div>
-                <div class="stat-label">Accepted</div>
+                <div class="stat-label">Accepted Today</div>
+            </div>
+            <div class="stat-card">
+                <i class="stat-icon fas fa-check-double" style="color: #155724;"></i>
+                <div class="stat-number" id="statAcceptedAll">0</div>
+                <div class="stat-label">Accepted Total</div>
             </div>
             <div class="stat-card">
                 <i class="stat-icon fas fa-clock" style="color: #ffc107;"></i>
                 <div class="stat-number" id="statPending">0</div>
-                <div class="stat-label">Pending</div>
+                <div class="stat-label">Pending Today</div>
+            </div>
+            <div class="stat-card">
+                <i class="stat-icon fas fa-clock" style="color: #856404;"></i>
+                <div class="stat-number" id="statPendingAll">0</div>
+                <div class="stat-label">Pending Total</div>
             </div>
             <div class="stat-card">
                 <i class="stat-icon fas fa-times-circle" style="color: #dc3545;"></i>
                 <div class="stat-number" id="statDeclined">0</div>
-                <div class="stat-label">Declined</div>
+                <div class="stat-label">Declined Today</div>
+            </div>
+            <div class="stat-card">
+                <i class="stat-icon fas fa-times-circle" style="color: #721c24;"></i>
+                <div class="stat-number" id="statDeclinedAll">0</div>
+                <div class="stat-label">Declined Total</div>
+            </div>
+            <div class="stat-card">
+                <i class="stat-icon fas fa-book" style="color: #17a2b8;"></i>
+                <div class="stat-number" id="statBooked">0</div>
+                <div class="stat-label">Booked Today</div>
             </div>
         </div>
 
@@ -579,6 +599,19 @@
                         document.getElementById('statAccepted').textContent = data.data.accepted_today;
                         document.getElementById('statPending').textContent = data.data.pending_today;
                         document.getElementById('statDeclined').textContent = data.data.declined_today;
+                        if (document.getElementById('statBooked')) {
+                            document.getElementById('statBooked').textContent = data.data.booked_today;
+                        }
+                        // overall counts
+                        if (document.getElementById('statAcceptedAll')) {
+                            document.getElementById('statAcceptedAll').textContent = data.data.accepted_all;
+                        }
+                        if (document.getElementById('statPendingAll')) {
+                            document.getElementById('statPendingAll').textContent = data.data.pending_all;
+                        }
+                        if (document.getElementById('statDeclinedAll')) {
+                            document.getElementById('statDeclinedAll').textContent = data.data.declined_all;
+                        }
                     }
                 })
                 .catch(() => {});
@@ -630,6 +663,16 @@
                         <div class="apt-field">
                             <div class="apt-label">Issue</div>
                             <div class="apt-value">${escapeHtml(apt.issue)}</div>
+                        </div>
+                    </div>
+                    <div class="appointment-header">
+                        <div class="apt-field">
+                            <div class="apt-label">Booked On</div>
+                            <div class="apt-value">${apt.created_at_display || 'N/A'}</div>
+                        </div>
+                        <div class="apt-field">
+                            <div class="apt-label">Requested On (client local)</div>
+                            <div class="apt-value">${apt.client_timestamp_raw ? new Date(apt.client_timestamp_raw).toLocaleString() : (apt.client_timestamp_display || 'N/A')}</div>
                         </div>
                     </div>
                     <div class="appointment-footer">
