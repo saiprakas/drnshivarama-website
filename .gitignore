@@ -1,0 +1,12 @@
+# Dependencies build artifacts
+node_modules/sqlite3/build/
+
+# Database files
+*.db
+
+# Temporary files
+/tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
